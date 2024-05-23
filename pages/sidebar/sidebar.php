@@ -23,22 +23,28 @@
                      <span class="sidebar__link-floating">Trang chủ</span>
                  </a>
 
-                 <a href="index.php?quanly=themsinhvien" class="sidebar__link">
+                 <a href="index.php?quanly=themdanhmuc" class="sidebar__link">
                      <i class="ri-compass-3-line"></i>
-                     <span class="sidebar__link-name">Thêm sinh viên</span>
-                     <span class="sidebar__link-floating">Thêm sinh viên</span>
+                     <span class="sidebar__link-name">Thêm danh mục sản phẩm</span>
+                     <span class="sidebar__link-floating">Thêm danh mục sản phẩm</span>
                  </a>
 
-                 <a href="index.php?quanly=themquanly" class="sidebar__link">
+                 <a href="index.php?quanly=themsanpham" class="sidebar__link">
                      <i class="ri-video-line"></i>
-                     <span class="sidebar__link-name">Thêm quản lí</span>
-                     <span class="sidebar__link-floating">Thêm quản lí</span>
+                     <span class="sidebar__link-name">Thêm sản phẩm</span>
+                     <span class="sidebar__link-floating">Thêm sản phẩm</span>
                  </a>
 
-                 <a href="index.php?quanly=donxin" class="sidebar__link">
+                 <a href="index.php?quanly=themtaikhoan" class="sidebar__link">
                      <i class="ri-add-box-line"></i>
-                     <span class="sidebar__link-name">Thêm đơn xin</span>
-                     <span class="sidebar__link-floating">Thêm đơn xin</span>
+                     <span class="sidebar__link-name">Thêm tài khoản</span>
+                     <span class="sidebar__link-floating">Thêm tài khoản</span>
+                 </a>
+
+                 <a href="index.php?quanly=xuatkho" class="sidebar__link">
+                     <i class="ri-add-box-line"></i>
+                     <span class="sidebar__link-name">Xuất kho</span>
+                     <span class="sidebar__link-floating">Xuất kho</span>
                  </a>
              </div>
 
@@ -46,32 +52,36 @@
                  <span>Danh sách</span>
              </h3>
              <div class="sidebar__list">
-                 <a href="index.php?quanly=danhsachdonxinsv" class="sidebar__link">
+                 <a href="index.php?quanly=danhmucsanpham" class="sidebar__link">
                      <i class="ri-history-line"></i>
-                     <span class="sidebar__link-name">Danh sách đơn xin</span>
-                     <span class="sidebar__link-floating">Danh sách đơn xin</span>
+                     <span class="sidebar__link-name">Danh sách danh mục sản phẩm</span>
+                     <span class="sidebar__link-floating">Danh sách danh mục sản phẩm</span>
                  </a>
-                 <a href="index.php?quanly=danhsachformguisv" class="sidebar__link">
+                 <a href="index.php?quanly=danhsachsanpham" class="sidebar__link">
                      <i class="ri-history-line"></i>
-                     <span class="sidebar__link-name">Danh sách form gửi</span>
-                     <span class="sidebar__link-floating">Danh sách form gửi</span>
+                     <span class="sidebar__link-name">Danh sách sản phẩm</span>
+                     <span class="sidebar__link-floating">Danh sách sản phẩm</span>
+                 </a>
+                 <a href="index.php?quanly=danhsachtaikhoan" class="sidebar__link">
+                     <i class="ri-history-line"></i>
+                     <span class="sidebar__link-name">Danh sách tài khoản</span>
+                     <span class="sidebar__link-floating">Danh sách tài khoản</span>
+                 </a>
+                 <a href="index.php?quanly=quanlixuatkho" class="sidebar__link">
+                     <i class="ri-history-line"></i>
+                     <span class="sidebar__link-name">Quản lí xuất kho</span>
+                     <span class="sidebar__link-floating">Quản lí xuất kho</span>
                  </a>
              </div>
              <h3 class="sidebar__title">
-                 <span>General</span>
+                 <span>Cá nhân</span>
              </h3>
 
              <div class="sidebar__list">
-                 <a href="#" class="sidebar__link">
-                     <i class="ri-notification-2-line"></i>
-                     <span class="sidebar__link-name">Notifications</span>
-                     <span class="sidebar__link-floating">Notifications</span>
-                 </a>
-
-                 <a href="index.php?quanly=doimatkhausv" class="sidebar__link">
+                 <a href="index.php?quanly=hoso" class="sidebar__link">
                      <i class="ri-settings-3-line"></i>
-                     <span class="sidebar__link-name">Đổi mật khẩu</span>
-                     <span class="sidebar__link-floating">Đổi mật khẩu</span>
+                     <span class="sidebar__link-name">Hồ sơ người dùng</span>
+                     <span class="sidebar__link-floating">Hồ sơ người dùng</span>
                  </a>
                  <?php
                      }

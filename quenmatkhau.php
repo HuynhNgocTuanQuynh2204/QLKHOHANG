@@ -6,21 +6,14 @@
   if (isset($_POST['timkiem'])){
     $taikhoan = $_POST['taikhoan'];
 
-    $sql_nv = "SELECT * FROM sinhvien WHERE taikhoan = '".$taikhoan."' LIMIT 1 ";
-    $row_nv = mysqli_query($mysqli, $sql_nv);
-    $id = mysqli_fetch_array($row_nv);
-    $count = mysqli_num_rows($row_nv);
-
-    $sql_am = "SELECT * FROM quanly WHERE taikhoan = '".$taikhoan."' LIMIT 1 ";
+    $sql_am = "SELECT * FROM user WHERE username = '".$taikhoan."' LIMIT 1 ";
     $row_am = mysqli_query($mysqli, $sql_am);
     $id_am = mysqli_fetch_array($row_am);
     $count_am = mysqli_num_rows($row_am);
 
-    if ($count > 0 || $count_am > 0){
-        if ($count > 0) {
-            echo '<script>alert("Địa chỉ đúng vui lòng đặt lại mật khẩu"); window.location.href = "matkhaumoi.php?id=' . $id["id_sv"] . '";</script>';
-        }else if ($count_am > 0) {
-            echo '<script>alert("Địa chỉ đúng vui lòng đặt lại mật khẩu"); window.location.href = "matkhaumoi.php?id=' . $id_am["id_ql"] . '";</script>';
+    if ($count_am > 0){
+        if ($count_am > 0) {
+            echo '<script>alert("Địa chỉ đúng vui lòng đặt lại mật khẩu"); window.location.href = "matkhaumoi.php?id=' . $id_am["id_user"] . '";</script>';
         } 
     }else {
         echo '<p style="color:red;text-align:center">Không tìm thấy Email của bạn.Vui lòng kiểm tra lại!</p>';

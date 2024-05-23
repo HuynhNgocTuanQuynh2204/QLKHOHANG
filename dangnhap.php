@@ -46,7 +46,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="https://www.sam.edu.vn/Data/Sites/1/News/2763/4bb205bd6c1455446ac0d94c5882e845.jpg" alt="Image" class="img-fluid">
+                    <img src="images/QLKHO.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="col-md-6 contents">
                     <div class="row justify-content-center">

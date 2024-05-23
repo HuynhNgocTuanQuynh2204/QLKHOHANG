@@ -1,26 +1,26 @@
 <?php
 
-// Truy vấn tổng nhập kho và xuất kho theo từng tháng
+// Truy vấn tổng nhập kho và xuất kho theo từng tuần
 $sqlNhapKho = "
-  SELECT DATE_FORMAT(thoigian, '%Y-%m') as Thang, tensanpham, SUM(soluong) as TongNhapKho 
-  FROM sanpham 
-  GROUP BY Thang, tensanpham";
+SELECT YEAR(thoigian) AS Nam, WEEK(thoigian) AS Tuan, tensanpham, SUM(soluong) AS TongNhapKho 
+FROM sanpham 
+GROUP BY Nam, Tuan, tensanpham";
 $resultNhapKho = $mysqli->query($sqlNhapKho);
 
 $nhapKhoData = [];
 while ($row = $resultNhapKho->fetch_assoc()) {
-    $nhapKhoData[$row['Thang']][$row['tensanpham']] = $row['TongNhapKho'];
+    $nhapKhoData[$row['Nam'] . '-' . $row['Tuan']][$row['tensanpham']] = $row['TongNhapKho'];
 }
 
 $sqlXuatKho = "
-  SELECT DATE_FORMAT(thoigian, '%Y-%m') as Thang, tensanpham, SUM(soluong) as TongXuatKho 
-  FROM xuatkho 
-  GROUP BY Thang, tensanpham";
+SELECT YEAR(thoigian) AS Nam, WEEK(thoigian) AS Tuan, tensanpham, SUM(soluong) AS TongXuatKho 
+FROM xuatkho 
+GROUP BY Nam, Tuan, tensanpham";
 $resultXuatKho = $mysqli->query($sqlXuatKho);
 
 $xuatKhoData = [];
 while ($row = $resultXuatKho->fetch_assoc()) {
-    $xuatKhoData[$row['Thang']][$row['tensanpham']] = $row['TongXuatKho'];
+    $xuatKhoData[$row['Nam'] . '-' . $row['Tuan']][$row['tensanpham']] = $row['TongXuatKho'];
 }
 ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -30,10 +30,10 @@ while ($row = $resultXuatKho->fetch_assoc()) {
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Thống kê</h1>
                 <div class="d-flex justify-content-around mt-4">
-                <a class="btn btn-primary" href="index.php?quanly=7ngay" role="button">7 ngày</a>
-                <a class="btn btn-primary" href="index.php" role="button">1 tháng</a>
-                <a class="btn btn-primary" href="index.php?quanly=1nam" role="button">1 năm</a>
-            </div>
+                    <a class="btn btn-primary" href="index.php?quanly=7ngay" role="button">7 ngày</a>
+                    <a class="btn btn-primary" href="index.php" role="button">1 tháng</a>
+                    <a class="btn btn-primary" href="index.php?quanly=1nam" role="button">1 năm</a>
+                </div>
             </div>
             <?php if (isset($_SESSION['hovaten'])) { ?>
                 <h3>Xin chào: <?php echo $_SESSION['hovaten'] ?></h3>
@@ -78,25 +78,25 @@ while ($row = $resultXuatKho->fetch_assoc()) {
             <div id="piechart_3d" style="width: 100%; height: 500px;"></div>
 
             <!-- Biểu đồ cột -->
-            <h3>Thống kê xuất/nhập kho theo tháng</h3>
+            <h3>Thống kê xuất/nhập kho theo tuần</h3>
             <script type="text/javascript">
                 google.charts.load('current', {'packages': ['corechart', 'bar']});
                 google.charts.setOnLoadCallback(drawBarChart);
 
                 function drawBarChart() {
                     var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Tháng');
+                    data.addColumn('string', 'Tuần');
                     <?php
                     $sanphamList = [];
-                    foreach ($nhapKhoData as $monthData) {
-                        foreach (array_keys($monthData) as $sanpham) {
+                    foreach ($nhapKhoData as $weekData) {
+                        foreach (array_keys($weekData) as $sanpham) {
                             if (!in_array($sanpham, $sanphamList)) {
                                 $sanphamList[] = $sanpham;
                             }
                         }
                     }
-                    foreach ($xuatKhoData as $monthData) {
-                        foreach (array_keys($monthData) as $sanpham) {
+                    foreach ($xuatKhoData as $weekData) {
+                        foreach (array_keys($weekData) as $sanpham) {
                             if (!in_array($sanpham, $sanphamList)) {
                                 $sanphamList[] = $sanpham;
                             }
@@ -108,13 +108,13 @@ while ($row = $resultXuatKho->fetch_assoc()) {
                         echo "data.addColumn('number', 'Xuất kho $sanpham');";
                     }
 
-                    $months = array_unique(array_merge(array_keys($nhapKhoData), array_keys($xuatKhoData)));
-                    sort($months);
-                    foreach ($months as $month) {
-                        $row = ["'$month'"];
+                    $weeks = array_unique(array_merge(array_keys($nhapKhoData), array_keys($xuatKhoData)));
+                    sort($weeks);
+                    foreach ($weeks as $week) {
+                        $row = ["'$week'"];
                         foreach ($sanphamList as $sanpham) {
-                            $row[] = isset($nhapKhoData[$month][$sanpham]) ? $nhapKhoData[$month][$sanpham] : 0;
-                            $row[] = isset($xuatKhoData[$month][$sanpham]) ? $xuatKhoData[$month][$sanpham] : 0;
+                            $row[] = isset($nhapKhoData[$week][$sanpham]) ? $nhapKhoData[$week][$sanpham] : 0;
+                            $row[] = isset($xuatKhoData[$week][$sanpham]) ? $xuatKhoData[$week][$sanpham] : 0;
                         }
                         echo "data.addRow([" . implode(',', $row) . "]);";
                     }
@@ -122,7 +122,7 @@ while ($row = $resultXuatKho->fetch_assoc()) {
 
                     var options = {
                         chart: {
-                            title: 'Thống kê sản phẩm theo tháng',
+                            title: 'Thống kê sản phẩm theo tuần',
                             subtitle: 'Tổng nhập kho và tổng xuất kho theo từng loại mặt hàng',
                         },
                         bars: 'vertical',

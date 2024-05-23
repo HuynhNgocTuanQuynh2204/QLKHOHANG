@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Giải quyết thủ tục hành chính</title>
+    <title>Quản lý kho hàng</title>
 </head>
 
 <body>

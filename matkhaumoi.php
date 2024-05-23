@@ -8,13 +8,11 @@ if (isset($_POST['datlaimatkhau'])) {
     $matkhau2 = md5($_POST['password2']);
     $id = $_GET['id'];
     if ($matkhau1 == $matkhau2) {
-        $sql_dk = "UPDATE sinhvien SET matkhau = '$matkhau1' WHERE id_sv = '$id'";
-        $row_dk = mysqli_query($mysqli, $sql_dk);
 
-        $sql_am = "UPDATE quanly SET matkhau = '$matkhau1' WHERE id_ql = '$id'";
+        $sql_am = "UPDATE user SET password = '$matkhau1' WHERE id_user = '$id'";
         $row_am = mysqli_query($mysqli, $sql_am);
 
-        if ($row_dk || $row_am)  {   
+        if ( $row_am)  {   
             echo '<script>alert("Mật khẩu đặt lại thành công");window.location.href = "dangnhap.php";</script>';
         } else {  
             echo '<script>alert("Đã xảy ra lỗi. Vui lòng thử lại!"); window.location.href =  "dangnhap.php";</script>';       
