@@ -1,24 +1,25 @@
 <!doctype html>
 <html lang="en">
 <?php
-  include("config/config.php");
-  session_start();
+include("config/config.php");
+session_start();
 if (isset($_POST['datlaimatkhau'])) {
-    $matkhau1 = md5($_POST['password1']);
-    $matkhau2 = md5($_POST['password2']);
+    $matkhau1 = $_POST['password1'];
+    $matkhau2 = $_POST['password2'];
     $id = $_GET['id'];
     if ($matkhau1 == $matkhau2) {
+        $hashed_password = password_hash($matkhau1, PASSWORD_DEFAULT);
 
-        $sql_am = "UPDATE user SET password = '$matkhau1' WHERE id_user = '$id'";
+        $sql_am = "UPDATE user SET password = '$hashed_password' WHERE id_user = '$id'";
         $row_am = mysqli_query($mysqli, $sql_am);
 
-        if ( $row_am)  {   
+        if ($row_am) {   
             echo '<script>alert("Mật khẩu đặt lại thành công");window.location.href = "dangnhap.php";</script>';
         } else {  
             echo '<script>alert("Đã xảy ra lỗi. Vui lòng thử lại!"); window.location.href =  "dangnhap.php";</script>';       
         }
     } else {
-        echo '<script>alert("Mật khẩu không khớp. Vui lòng thử lại!"); window.location.href = "dangnhap.php";</script>';
+        echo '<script>alert("Mật khẩu không khớp. Vui lòng thử lại!"); window.location.href = "matkhaumoi.php";</script>';
     }
 }
 ?>
@@ -60,9 +61,6 @@ if (isset($_POST['datlaimatkhau'])) {
 </head>
 
 <body>
-
-
-
     <div class="content">
         <div class="container">
             <div class="row">
@@ -78,24 +76,21 @@ if (isset($_POST['datlaimatkhau'])) {
                             </div>
                             <form action="matkhaumoi.php" method="post">
                                 <div class="form-group first">
-                                    <input type="password" class="form-control" id="taikhoan" name="password1" required>
-                                    <label for="taikhoan">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="password1" name="password1" required>
+                                    <label for="password1">Mật khẩu</label>
                                 </div>
                                 <div class="form-group last mb-4">
-                                    <input type="password" class="form-control" id="matkhau" name="password2" required>
-                                    <label for="matkhau">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" id="password2" name="password2" required>
+                                    <label for="password2">Nhập lại mật khẩu</label>
                                 </div>
                                 <input type="submit" value="Đặt lại mật khẩu" name="datlaimatkhau" class="btn btn-block btn-primary">
                             </form>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
-
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -123,5 +118,4 @@ if (isset($_POST['datlaimatkhau'])) {
         });
     </script>
 </body>
-
 </html>
