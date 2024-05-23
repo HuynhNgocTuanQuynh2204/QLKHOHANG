@@ -53,7 +53,7 @@
                         <div class="col-md-8">
                             <div class="mb-4">
                                 <h3>Đăng nhập hệ thống</h3>
-                                <p class="mb-4">Đăng nhập vào hệ thống bằng email và mật khẩu mà nhà trường đã cung cấp.</p>
+                                <p class="mb-4">Đăng nhập vào hệ thống bằng email và mật khẩu </p>
                             </div>
                             <form action="pages/xulydangnhap.php" method="post">
                                 <div class="form-group first">
